@@ -1,0 +1,1755 @@
+{
+    "type": "program",
+    "children": [
+        {
+            "type": "includeDirective",
+            "children": [
+                "#",
+                "include",
+                "<iostream>"
+            ]
+        },
+        {
+            "type": "includeDirective",
+            "children": [
+                "#",
+                "include",
+                "<string>"
+            ]
+        },
+        {
+            "type": "includeDirective",
+            "children": [
+                "#",
+                "include",
+                "<algorithm>"
+            ]
+        },
+        {
+            "type": "usingNamespaceDeclaration",
+            "children": [
+                "using",
+                "namespace",
+                "std",
+                ";"
+            ]
+        },
+        {
+            "type": "functionDefinition",
+            "children": [
+                {
+                    "type": "typeSpecifier",
+                    "children": [
+                        {
+                            "type": "baseTypeSpecifier",
+                            "children": [
+                                "bool"
+                            ]
+                        }
+                    ]
+                },
+                "isPalindrome",
+                "(",
+                {
+                    "type": "parameterList",
+                    "children": [
+                        {
+                            "type": "parameter",
+                            "children": [
+                                {
+                                    "type": "parameterTypeSpecifier",
+                                    "children": [
+                                        {
+                                            "type": "typeSpecifier",
+                                            "children": [
+                                                "const",
+                                                {
+                                                    "type": "baseTypeSpecifier",
+                                                    "children": [
+                                                        "string"
+                                                    ]
+                                                },
+                                                "&"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "s"
+                            ]
+                        }
+                    ]
+                },
+                ")",
+                {
+                    "type": "compoundStatement",
+                    "children": [
+                        "{",
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "declarationStatement",
+                                    "children": [
+                                        {
+                                            "type": "variableDeclaration",
+                                            "children": [
+                                                {
+                                                    "type": "typeSpecifier",
+                                                    "children": [
+                                                        {
+                                                            "type": "baseTypeSpecifier",
+                                                            "children": [
+                                                                "int"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "initDeclaratorList",
+                                                    "children": [
+                                                        {
+                                                            "type": "initDeclarator",
+                                                            "children": [
+                                                                "left",
+                                                                "=",
+                                                                {
+                                                                    "type": "initializer",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "assignmentExpression",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "operationExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "additionExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "multiplicationExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "unaryExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "postfixExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "primaryExpr",
+                                                                                                                            "children": [
+                                                                                                                                "0"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        ",",
+                                                        {
+                                                            "type": "initDeclarator",
+                                                            "children": [
+                                                                "right",
+                                                                "=",
+                                                                {
+                                                                    "type": "initializer",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "assignmentExpression",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "operationExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "additionExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "additionExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "multiplicationExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "unaryExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "postfixExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "primaryExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        "s",
+                                                                                                                                        ".",
+                                                                                                                                        {
+                                                                                                                                            "type": "backFunctionName",
+                                                                                                                                            "children": [
+                                                                                                                                                "size"
+                                                                                                                                            ]
+                                                                                                                                        },
+                                                                                                                                        "(",
+                                                                                                                                        ")"
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                },
+                                                                                                "-",
+                                                                                                {
+                                                                                                    "type": "multiplicationExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "unaryExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "postfixExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "primaryExpr",
+                                                                                                                            "children": [
+                                                                                                                                "1"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "iterationStatement",
+                                    "children": [
+                                        "while",
+                                        "(",
+                                        {
+                                            "type": "logicalExpression",
+                                            "children": [
+                                                {
+                                                    "type": "logicalOrExpr",
+                                                    "children": [
+                                                        {
+                                                            "type": "logicalAndExpr",
+                                                            "children": [
+                                                                {
+                                                                    "type": "equalityExpr",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "relationalExpr",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "relationalExpr",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "operationExpression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "additionExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "multiplicationExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "unaryExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "postfixExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "primaryExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        "left"
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                "<",
+                                                                                {
+                                                                                    "type": "operationExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "additionExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "multiplicationExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "unaryExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "postfixExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "primaryExpr",
+                                                                                                                            "children": [
+                                                                                                                                "right"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ")",
+                                        {
+                                            "type": "compoundStatement",
+                                            "children": [
+                                                "{",
+                                                {
+                                                    "type": "statement",
+                                                    "children": [
+                                                        {
+                                                            "type": "selectionStatement",
+                                                            "children": [
+                                                                "if",
+                                                                "(",
+                                                                {
+                                                                    "type": "logicalExpression",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "logicalOrExpr",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "logicalAndExpr",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "equalityExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "equalityExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "relationalExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "operationExpression",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "additionExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "multiplicationExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        {
+                                                                                                                                            "type": "unaryExpr",
+                                                                                                                                            "children": [
+                                                                                                                                                {
+                                                                                                                                                    "type": "postfixExpr",
+                                                                                                                                                    "children": [
+                                                                                                                                                        {
+                                                                                                                                                            "type": "primaryExpr",
+                                                                                                                                                            "children": [
+                                                                                                                                                                "s",
+                                                                                                                                                                "[",
+                                                                                                                                                                {
+                                                                                                                                                                    "type": "argList",
+                                                                                                                                                                    "children": [
+                                                                                                                                                                        {
+                                                                                                                                                                            "type": "assignmentExpression",
+                                                                                                                                                                            "children": [
+                                                                                                                                                                                {
+                                                                                                                                                                                    "type": "operationExpression",
+                                                                                                                                                                                    "children": [
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "type": "additionExpr",
+                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "type": "multiplicationExpr",
+                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                        {
+                                                                                                                                                                                                            "type": "unaryExpr",
+                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                {
+                                                                                                                                                                                                                    "type": "postfixExpr",
+                                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                            "type": "primaryExpr",
+                                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                                "left"
+                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                            ]
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                    ]
+                                                                                                                                                                                                }
+                                                                                                                                                                                            ]
+                                                                                                                                                                                        }
+                                                                                                                                                                                    ]
+                                                                                                                                                                                }
+                                                                                                                                                                            ]
+                                                                                                                                                                        }
+                                                                                                                                                                    ]
+                                                                                                                                                                },
+                                                                                                                                                                "]"
+                                                                                                                                                            ]
+                                                                                                                                                        }
+                                                                                                                                                    ]
+                                                                                                                                                }
+                                                                                                                                            ]
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                },
+                                                                                                "!=",
+                                                                                                {
+                                                                                                    "type": "relationalExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "operationExpression",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "additionExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "multiplicationExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "unaryExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        {
+                                                                                                                                            "type": "postfixExpr",
+                                                                                                                                            "children": [
+                                                                                                                                                {
+                                                                                                                                                    "type": "primaryExpr",
+                                                                                                                                                    "children": [
+                                                                                                                                                        "s",
+                                                                                                                                                        "[",
+                                                                                                                                                        {
+                                                                                                                                                            "type": "argList",
+                                                                                                                                                            "children": [
+                                                                                                                                                                {
+                                                                                                                                                                    "type": "assignmentExpression",
+                                                                                                                                                                    "children": [
+                                                                                                                                                                        {
+                                                                                                                                                                            "type": "operationExpression",
+                                                                                                                                                                            "children": [
+                                                                                                                                                                                {
+                                                                                                                                                                                    "type": "additionExpr",
+                                                                                                                                                                                    "children": [
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "type": "multiplicationExpr",
+                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "type": "unaryExpr",
+                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                        {
+                                                                                                                                                                                                            "type": "postfixExpr",
+                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                {
+                                                                                                                                                                                                                    "type": "primaryExpr",
+                                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                                        "right"
+                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                            ]
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                    ]
+                                                                                                                                                                                                }
+                                                                                                                                                                                            ]
+                                                                                                                                                                                        }
+                                                                                                                                                                                    ]
+                                                                                                                                                                                }
+                                                                                                                                                                            ]
+                                                                                                                                                                        }
+                                                                                                                                                                    ]
+                                                                                                                                                                }
+                                                                                                                                                            ]
+                                                                                                                                                        },
+                                                                                                                                                        "]"
+                                                                                                                                                    ]
+                                                                                                                                                }
+                                                                                                                                            ]
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                ")",
+                                                                {
+                                                                    "type": "compoundStatement",
+                                                                    "children": [
+                                                                        "{",
+                                                                        {
+                                                                            "type": "statement",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "jumpStatement",
+                                                                                    "children": [
+                                                                                        "return",
+                                                                                        {
+                                                                                            "type": "assignmentExpression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "operationExpression",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "additionExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "multiplicationExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "unaryExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "postfixExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        {
+                                                                                                                                            "type": "primaryExpr",
+                                                                                                                                            "children": [
+                                                                                                                                                "false"
+                                                                                                                                            ]
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        ";"
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "}"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "statement",
+                                                    "children": [
+                                                        {
+                                                            "type": "expressionStatement",
+                                                            "children": [
+                                                                {
+                                                                    "type": "expStatement",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "initializer",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "assignmentExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "operationExpression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "additionExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "multiplicationExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "unaryExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "postfixExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "primaryExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        "left"
+                                                                                                                                    ]
+                                                                                                                                },
+                                                                                                                                "++"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                ";"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "statement",
+                                                    "children": [
+                                                        {
+                                                            "type": "expressionStatement",
+                                                            "children": [
+                                                                {
+                                                                    "type": "expStatement",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "initializer",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "assignmentExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "operationExpression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "additionExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "multiplicationExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "unaryExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "postfixExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "primaryExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        "right"
+                                                                                                                                    ]
+                                                                                                                                },
+                                                                                                                                "--"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                ";"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                "}"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "jumpStatement",
+                                    "children": [
+                                        "return",
+                                        {
+                                            "type": "assignmentExpression",
+                                            "children": [
+                                                {
+                                                    "type": "operationExpression",
+                                                    "children": [
+                                                        {
+                                                            "type": "additionExpr",
+                                                            "children": [
+                                                                {
+                                                                    "type": "multiplicationExpr",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "unaryExpr",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "postfixExpr",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "primaryExpr",
+                                                                                            "children": [
+                                                                                                "true"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        "}"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "functionDefinition",
+            "children": [
+                {
+                    "type": "typeSpecifier",
+                    "children": [
+                        {
+                            "type": "baseTypeSpecifier",
+                            "children": [
+                                "int"
+                            ]
+                        }
+                    ]
+                },
+                "main",
+                "(",
+                ")",
+                {
+                    "type": "compoundStatement",
+                    "children": [
+                        "{",
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "declarationStatement",
+                                    "children": [
+                                        {
+                                            "type": "variableDeclaration",
+                                            "children": [
+                                                {
+                                                    "type": "typeSpecifier",
+                                                    "children": [
+                                                        {
+                                                            "type": "baseTypeSpecifier",
+                                                            "children": [
+                                                                "string"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "initDeclaratorList",
+                                                    "children": [
+                                                        {
+                                                            "type": "initDeclarator",
+                                                            "children": [
+                                                                "input"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "declarationStatement",
+                                    "children": [
+                                        {
+                                            "type": "variableDeclaration",
+                                            "children": [
+                                                {
+                                                    "type": "typeSpecifier",
+                                                    "children": [
+                                                        {
+                                                            "type": "baseTypeSpecifier",
+                                                            "children": [
+                                                                "int"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "initDeclaratorList",
+                                                    "children": [
+                                                        {
+                                                            "type": "initDeclarator",
+                                                            "children": [
+                                                                "result",
+                                                                "=",
+                                                                {
+                                                                    "type": "initializer",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "assignmentExpression",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "conditionalExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "logicalExpression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "logicalOrExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "logicalAndExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "equalityExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "relationalExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "operationExpression",
+                                                                                                                                    "children": [
+                                                                                                                                        {
+                                                                                                                                            "type": "additionExpr",
+                                                                                                                                            "children": [
+                                                                                                                                                {
+                                                                                                                                                    "type": "multiplicationExpr",
+                                                                                                                                                    "children": [
+                                                                                                                                                        {
+                                                                                                                                                            "type": "unaryExpr",
+                                                                                                                                                            "children": [
+                                                                                                                                                                {
+                                                                                                                                                                    "type": "postfixExpr",
+                                                                                                                                                                    "children": [
+                                                                                                                                                                        {
+                                                                                                                                                                            "type": "primaryExpr",
+                                                                                                                                                                            "children": [
+                                                                                                                                                                                "(",
+                                                                                                                                                                                {
+                                                                                                                                                                                    "type": "logicalExpression",
+                                                                                                                                                                                    "children": [
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "type": "logicalOrExpr",
+                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "type": "logicalAndExpr",
+                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                        {
+                                                                                                                                                                                                            "type": "equalityExpr",
+                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                {
+                                                                                                                                                                                                                    "type": "relationalExpr",
+                                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                            "type": "relationalExpr",
+                                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                    "type": "operationExpression",
+                                                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                            "type": "additionExpr",
+                                                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                    "type": "multiplicationExpr",
+                                                                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                            "type": "unaryExpr",
+                                                                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                    "type": "postfixExpr",
+                                                                                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                                            "type": "primaryExpr",
+                                                                                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                                                                                "3"
+                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                        ">",
+                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                            "type": "operationExpression",
+                                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                    "type": "additionExpr",
+                                                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                            "type": "multiplicationExpr",
+                                                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                    "type": "unaryExpr",
+                                                                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                            "type": "postfixExpr",
+                                                                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                    "type": "primaryExpr",
+                                                                                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                                                                                        "2"
+                                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                            ]
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                    ]
+                                                                                                                                                                                                }
+                                                                                                                                                                                            ]
+                                                                                                                                                                                        }
+                                                                                                                                                                                    ]
+                                                                                                                                                                                },
+                                                                                                                                                                                ")"
+                                                                                                                                                                            ]
+                                                                                                                                                                        }
+                                                                                                                                                                    ]
+                                                                                                                                                                }
+                                                                                                                                                            ]
+                                                                                                                                                        }
+                                                                                                                                                    ]
+                                                                                                                                                }
+                                                                                                                                            ]
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        "?",
+                                                                                        {
+                                                                                            "type": "assignmentExpression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "operationExpression",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "additionExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "multiplicationExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "unaryExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "postfixExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        {
+                                                                                                                                            "type": "primaryExpr",
+                                                                                                                                            "children": [
+                                                                                                                                                "1"
+                                                                                                                                            ]
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        ":",
+                                                                                        {
+                                                                                            "type": "assignmentExpression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "operationExpression",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "additionExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "multiplicationExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "unaryExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "postfixExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        {
+                                                                                                                                            "type": "primaryExpr",
+                                                                                                                                            "children": [
+                                                                                                                                                "-1"
+                                                                                                                                            ]
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "outputStream",
+                                    "children": [
+                                        "cout",
+                                        "<<",
+                                        {
+                                            "type": "outputStreamTarget",
+                                            "children": [
+                                                {
+                                                    "type": "outExpression",
+                                                    "children": [
+                                                        {
+                                                            "type": "assignmentExpression",
+                                                            "children": [
+                                                                {
+                                                                    "type": "operationExpression",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "additionExpr",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "multiplicationExpr",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "unaryExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "postfixExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "primaryExpr",
+                                                                                                            "children": [
+                                                                                                                "\"Enter a string to check if it is a palindrome: \""
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "inputStream",
+                                    "children": [
+                                        "cin",
+                                        ">>",
+                                        {
+                                            "type": "inputStreamTarget",
+                                            "children": [
+                                                "input"
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "selectionStatement",
+                                    "children": [
+                                        "if",
+                                        "(",
+                                        {
+                                            "type": "logicalExpression",
+                                            "children": [
+                                                {
+                                                    "type": "logicalOrExpr",
+                                                    "children": [
+                                                        {
+                                                            "type": "logicalAndExpr",
+                                                            "children": [
+                                                                {
+                                                                    "type": "equalityExpr",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "relationalExpr",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "operationExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "additionExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "multiplicationExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "unaryExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "postfixExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "primaryExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "frontFunctionName",
+                                                                                                                                    "children": [
+                                                                                                                                        "isPalindrome"
+                                                                                                                                    ]
+                                                                                                                                },
+                                                                                                                                "(",
+                                                                                                                                {
+                                                                                                                                    "type": "argList",
+                                                                                                                                    "children": [
+                                                                                                                                        {
+                                                                                                                                            "type": "assignmentExpression",
+                                                                                                                                            "children": [
+                                                                                                                                                {
+                                                                                                                                                    "type": "operationExpression",
+                                                                                                                                                    "children": [
+                                                                                                                                                        {
+                                                                                                                                                            "type": "additionExpr",
+                                                                                                                                                            "children": [
+                                                                                                                                                                {
+                                                                                                                                                                    "type": "multiplicationExpr",
+                                                                                                                                                                    "children": [
+                                                                                                                                                                        {
+                                                                                                                                                                            "type": "unaryExpr",
+                                                                                                                                                                            "children": [
+                                                                                                                                                                                {
+                                                                                                                                                                                    "type": "postfixExpr",
+                                                                                                                                                                                    "children": [
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "type": "primaryExpr",
+                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                "input"
+                                                                                                                                                                                            ]
+                                                                                                                                                                                        }
+                                                                                                                                                                                    ]
+                                                                                                                                                                                }
+                                                                                                                                                                            ]
+                                                                                                                                                                        }
+                                                                                                                                                                    ]
+                                                                                                                                                                }
+                                                                                                                                                            ]
+                                                                                                                                                        }
+                                                                                                                                                    ]
+                                                                                                                                                }
+                                                                                                                                            ]
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                },
+                                                                                                                                ")"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ")",
+                                        {
+                                            "type": "compoundStatement",
+                                            "children": [
+                                                "{",
+                                                {
+                                                    "type": "statement",
+                                                    "children": [
+                                                        {
+                                                            "type": "outputStream",
+                                                            "children": [
+                                                                "cout",
+                                                                "<<",
+                                                                {
+                                                                    "type": "outputStreamTarget",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "outExpression",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "assignmentExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "operationExpression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "additionExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "multiplicationExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "unaryExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "postfixExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "primaryExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        "\"True\""
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "<<",
+                                                                        {
+                                                                            "type": "outputStreamTarget",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "outExpression",
+                                                                                    "children": [
+                                                                                        "endl"
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                ";"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                "}"
+                                            ]
+                                        },
+                                        "else",
+                                        {
+                                            "type": "compoundStatement",
+                                            "children": [
+                                                "{",
+                                                {
+                                                    "type": "statement",
+                                                    "children": [
+                                                        {
+                                                            "type": "outputStream",
+                                                            "children": [
+                                                                "cout",
+                                                                "<<",
+                                                                {
+                                                                    "type": "outputStreamTarget",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "outExpression",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "assignmentExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "operationExpression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "additionExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "multiplicationExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "unaryExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "postfixExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "primaryExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        "\"False\""
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "<<",
+                                                                        {
+                                                                            "type": "outputStreamTarget",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "outExpression",
+                                                                                    "children": [
+                                                                                        "endl"
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                ";"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                "}"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "outputStream",
+                                    "children": [
+                                        "cout",
+                                        "<<",
+                                        {
+                                            "type": "outputStreamTarget",
+                                            "children": [
+                                                {
+                                                    "type": "outExpression",
+                                                    "children": [
+                                                        {
+                                                            "type": "assignmentExpression",
+                                                            "children": [
+                                                                "(",
+                                                                {
+                                                                    "type": "conditionalExpression",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "logicalExpression",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "logicalOrExpr",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "logicalAndExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "equalityExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "relationalExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "operationExpression",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "additionExpr",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "multiplicationExpr",
+                                                                                                                                    "children": [
+                                                                                                                                        {
+                                                                                                                                            "type": "unaryExpr",
+                                                                                                                                            "children": [
+                                                                                                                                                {
+                                                                                                                                                    "type": "postfixExpr",
+                                                                                                                                                    "children": [
+                                                                                                                                                        {
+                                                                                                                                                            "type": "primaryExpr",
+                                                                                                                                                            "children": [
+                                                                                                                                                                {
+                                                                                                                                                                    "type": "frontFunctionName",
+                                                                                                                                                                    "children": [
+                                                                                                                                                                        "isPalindrome"
+                                                                                                                                                                    ]
+                                                                                                                                                                },
+                                                                                                                                                                "(",
+                                                                                                                                                                {
+                                                                                                                                                                    "type": "argList",
+                                                                                                                                                                    "children": [
+                                                                                                                                                                        {
+                                                                                                                                                                            "type": "assignmentExpression",
+                                                                                                                                                                            "children": [
+                                                                                                                                                                                {
+                                                                                                                                                                                    "type": "operationExpression",
+                                                                                                                                                                                    "children": [
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "type": "additionExpr",
+                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "type": "multiplicationExpr",
+                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                        {
+                                                                                                                                                                                                            "type": "unaryExpr",
+                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                {
+                                                                                                                                                                                                                    "type": "postfixExpr",
+                                                                                                                                                                                                                    "children": [
+                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                            "type": "primaryExpr",
+                                                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                                                "input"
+                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                            ]
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                    ]
+                                                                                                                                                                                                }
+                                                                                                                                                                                            ]
+                                                                                                                                                                                        }
+                                                                                                                                                                                    ]
+                                                                                                                                                                                }
+                                                                                                                                                                            ]
+                                                                                                                                                                        }
+                                                                                                                                                                    ]
+                                                                                                                                                                },
+                                                                                                                                                                ")"
+                                                                                                                                                            ]
+                                                                                                                                                        }
+                                                                                                                                                    ]
+                                                                                                                                                }
+                                                                                                                                            ]
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "?",
+                                                                        {
+                                                                            "type": "assignmentExpression",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "operationExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "additionExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "multiplicationExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "unaryExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "postfixExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "primaryExpr",
+                                                                                                                            "children": [
+                                                                                                                                "\"True\""
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        ":",
+                                                                        {
+                                                                            "type": "assignmentExpression",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "operationExpression",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "additionExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "multiplicationExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "unaryExpr",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "postfixExpr",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "primaryExpr",
+                                                                                                                            "children": [
+                                                                                                                                "\"False\""
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                ")"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                "<<",
+                                                {
+                                                    "type": "outputStreamTarget",
+                                                    "children": [
+                                                        {
+                                                            "type": "outExpression",
+                                                            "children": [
+                                                                "endl"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "jumpStatement",
+                                    "children": [
+                                        "return",
+                                        {
+                                            "type": "assignmentExpression",
+                                            "children": [
+                                                {
+                                                    "type": "operationExpression",
+                                                    "children": [
+                                                        {
+                                                            "type": "additionExpr",
+                                                            "children": [
+                                                                {
+                                                                    "type": "multiplicationExpr",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "unaryExpr",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "postfixExpr",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "primaryExpr",
+                                                                                            "children": [
+                                                                                                "0"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        "}"
+                    ]
+                }
+            ]
+        },
+        "<EOF>"
+    ]
+}
