@@ -27,7 +27,9 @@ vector<int> kmpSearch(const string& s, const string& t) {
     int n = s.length();
     int m = t.length();
 
-    if (m == 0) return positions;  // 空模板串直接返回
+    if (m == 0) {
+        return positions;
+    }  // 空模板串直接返回
 
     vector<int> prefixTable = computePrefixTable(t);
     int j = 0;

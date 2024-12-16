@@ -65,14 +65,12 @@ class myVisitor(cppVisitor):
         include_file = ctx.IncludeFileName() or ctx.StringLiteral()
         if include_file:
             file_name = include_file.getText().strip('<>"')
-            if file_name == "iostream":
-                return "# iostream functionality is handled by print() and input()"
-            elif file_name == "string":
-                return "# string operations are native in Python"
-            elif file_name == "vector":
+            if file_name == "vector":
                 return "from typing import List"
             elif file_name == "stack":
                 return "from typing import List"
+            elif file_name == "sstream":
+                return "import io"
         return ""
 
     def visitUsingNamespaceDeclaration(self, ctx: cppParser.UsingNamespaceDeclarationContext):
@@ -219,7 +217,37 @@ class myVisitor(cppVisitor):
                         self.current_scope.initialize(var_name, init_value)
                         results.append(f"{self.indent()}{var_name} = {init_value}")
                     else:
-                        results.append(f"{self.indent()}{var_name} = None")
+                        if type_spec == "List[int]":
+                            params = []
+                            for expr in init_decl.primaryExpr():
+                                param = self.visit(expr)
+                                params.append(param)
+                            lenParams = len(params)
+                            if lenParams == 0:
+                                results.append(f"{self.indent()}{var_name} = []")
+                            elif lenParams == 1:
+                                # TODO: maybe need to revise
+                                results.append(f"{self.indent()}{var_name} = [{params[0]}]")
+                            elif lenParams == 2:
+                                results.append(f"{self.indent()}{var_name} = [{params[1]}] * {params[0]}")
+                            else:
+                                # TODO: maybe error handling
+                                results.append(f"{self.indent()}{var_name} = []")
+                        elif type_spec == "StringIO":
+                            # 获取 primaryExpr 节点并存储在 paramIO 变量中
+                            params = []
+                            for expr in init_decl.primaryExpr():
+                                param = self.visit(expr)  # 访问每个primaryExpr
+                                params.append(param)  # 将参数添加到列表中
+                            
+                            # 拼接参数为逗号分隔的字符串
+                            paramIO = ", ".join(params)
+                            
+                            # 生成 StringIO 初始化代码
+                            results.append(f"{self.indent()}{var_name} = {paramIO}.split(',')")
+                            # results.append(f"{self.indent()}{var_name} = io.StringIO({paramIO})")
+                        else:
+                            results.append(f"{self.indent()}{var_name} = None")
                         
             except ValueError as e:
                 self.report_error(init_decl.start.line, str(e))
@@ -245,6 +273,9 @@ class myVisitor(cppVisitor):
             return f"{var_name} = []"  # 初始化空列表
         else:
             return f"{var_name} = None"
+        
+    def visitArraySubscript(self, ctx: cppParser.ArraySubscriptContext):
+        return self.visit(ctx.assignmentExpression())
 
     def visitInitializer(self, ctx: cppParser.InitializerContext):
         return self.visit(ctx.assignmentExpression())
@@ -255,23 +286,36 @@ class myVisitor(cppVisitor):
     def visitExpStatement(self, ctx: cppParser.ExpStatementContext):
         if not ctx.children:
             return ""
-            
-        if ctx.initializer():
-            return self.visit(ctx.initializer())
-            
-        # 处理赋值操作
+        
+        # 处理赋值操作 (检查 ID 和可能的数组下标)
         if ctx.ID():
             var_name = ctx.ID().getText()
-            op = ctx.getChild(1).getText()  # 获取操作符
-            value = self.visit(ctx.initializer())
             
+            # 如果有数组下标，考虑数组形式的操作
+            if ctx.arraySubscript():
+                # 处理数组下标，如果有下标则获取下标
+                subscript = self.visit(ctx.arraySubscript())
+                var_name = f"{var_name}[{subscript}]"
+                op = ctx.getChild(2).getText()  # 如果有数组下标，操作符在下标之后
+            else:
+                op = ctx.getChild(1).getText()  # 操作符位于数组下标之前
+            
+            # 获取操作后的值（initializer）
+            if ctx.initializer():
+                value = self.visit(ctx.initializer())
+            
+            # 处理不同的操作符
             if op == "=":
                 return f"{var_name} = {value}"
             elif op == "+=":
                 return f"{var_name} += {value}"
             elif op == "-=":
                 return f"{var_name} -= {value}"
-                
+        
+        # 如果没有ID，则处理单独的initializer
+        elif ctx.initializer():
+            return self.visit(ctx.initializer())
+        
         return ""
 
     def visitSelectionStatement(self, ctx: cppParser.SelectionStatementContext):
@@ -314,6 +358,13 @@ class myVisitor(cppVisitor):
             self.indentation += 1
             body = self.visit(ctx.compoundStatement())
             self.indentation -= 1
+
+            if condition.startswith("for") and "in" in condition:
+                # 如果是 for ... in ... 格式，直接返回该格式的代码块，特殊处理 getline（比较麻烦）
+                self.indentation += 1
+                body = self.visit(ctx.compoundStatement())
+                self.indentation -= 1
+                return f"{condition}:\n{body}"
             return f"while {condition}:\n{body}"
         else:
             # for循环
@@ -362,7 +413,9 @@ class myVisitor(cppVisitor):
         if ctx.logicalOrExpr():
             return self.visit(ctx.logicalOrExpr())
         elif ctx.GET():  # 处理getline
-            return f"input()"  # 简化处理
+            fakeStream = ctx.ID()[0].getText()
+            var_name = ctx.ID()[1].getText()
+            return f"for {var_name} in {fakeStream}"
         return ""
 
     def visitOrExpression(self, ctx: cppParser.OrExpressionContext):
@@ -496,6 +549,31 @@ class myVisitor(cppVisitor):
                 return f"int({args})"
             elif func == "isdigit":
                 return f"{args}.isdigit()"
+            elif func == "sort":
+                # 获取参数列表
+                if args:
+                    args_list = args.split(',')
+                    
+                    if len(args_list) == 2:
+                        start, end = args_list[0].strip(), args_list[1].strip()
+                        
+                        # 提取元素名和处理 begin(), end() 形式
+                        if ".begin()" in start and ".end()" in end:
+                            # 提取元素名
+                            element_name = start.split('.begin()')[0].strip()
+                            return f"{element_name}.sort()"
+                        
+                        # 处理 begin() + x, end() + y 形式
+                        elif ".begin()" in start and "+" in start and ".begin()" in end and "+" in end:
+                            # 提取元素名和数字部分
+                            element_name = start.split('.begin()')[0].strip()
+                            start_index = int(start.split('+')[1].strip())
+                            end_index = int(end.split('+')[1].strip())
+                            
+                            return f"{element_name}[{start_index}:{end_index+1}].sort()"
+                
+                else:
+                    return "a.sort()"
                 
             return f"{func}({args})"
             
