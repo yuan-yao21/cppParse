@@ -4,12 +4,12 @@
 #include <sstream>
 using namespace std;
 int main() {
-    string input;
+    string user_input;
     cout << "Input numbers separated by commas: ";
-    getline(cin, input);
+    getline(cin, user_input);
 
     vector<int> numbers;
-    stringstream ss(input);
+    stringstream ss(user_input);
     string temp;
     
     // 将输入字符串按逗号分割并转换为整数存入vector

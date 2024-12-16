@@ -830,7 +830,7 @@
                                                         {
                                                             "type": "initDeclarator",
                                                             "children": [
-                                                                "input"
+                                                                "user_input"
                                                             ]
                                                         }
                                                     ]
@@ -1190,7 +1190,7 @@
                                         {
                                             "type": "inputStreamTarget",
                                             "children": [
-                                                "input"
+                                                "user_input"
                                             ]
                                         },
                                         ";"
@@ -1270,7 +1270,7 @@
                                                                                                                                                                                         {
                                                                                                                                                                                             "type": "primaryExpr",
                                                                                                                                                                                             "children": [
-                                                                                                                                                                                                "input"
+                                                                                                                                                                                                "user_input"
                                                                                                                                                                                             ]
                                                                                                                                                                                         }
                                                                                                                                                                                     ]
@@ -1557,7 +1557,7 @@
                                                                                                                                                                                                                         {
                                                                                                                                                                                                                             "type": "primaryExpr",
                                                                                                                                                                                                                             "children": [
-                                                                                                                                                                                                                                "input"
+                                                                                                                                                                                                                                "user_input"
                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                         }
                                                                                                                                                                                                                     ]

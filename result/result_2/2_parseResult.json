@@ -89,7 +89,7 @@
                                                         {
                                                             "type": "initDeclarator",
                                                             "children": [
-                                                                "input"
+                                                                "user_input"
                                                             ]
                                                         }
                                                     ]
@@ -170,7 +170,7 @@
                                         "(",
                                         "cin",
                                         ",",
-                                        "input",
+                                        "user_input",
                                         ")",
                                         ";"
                                     ]
@@ -254,7 +254,7 @@
                                                                 {
                                                                     "type": "primaryExpr",
                                                                     "children": [
-                                                                        "input"
+                                                                        "user_input"
                                                                     ]
                                                                 },
                                                                 ")"

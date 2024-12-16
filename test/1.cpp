@@ -15,15 +15,15 @@ bool isPalindrome(const string& s) {
 }
 
 int main() {
-    string input;
+    string user_input;
     int result = (3> 2) ? 1 : -1;
     cout << "Enter a string to check if it is a palindrome: ";
-    cin >> input;
-    if (isPalindrome(input)) {
+    cin >> user_input;
+    if (isPalindrome(user_input)) {
         cout << "True" << endl;
     } else {
         cout << "False" << endl;
     }
-    cout << (isPalindrome(input) ? "True" : "False") << endl;
+    cout << (isPalindrome(user_input) ? "True" : "False") << endl;
     return 0;
 }

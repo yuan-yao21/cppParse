@@ -384,7 +384,7 @@ children:
             children:
             - type: initDeclarator
               children:
-              - input
+              - user_input
         - ;
     - type: statement
       children:
@@ -539,7 +539,7 @@ children:
         - '>>'
         - type: inputStreamTarget
           children:
-          - input
+          - user_input
         - ;
     - type: statement
       children:
@@ -589,7 +589,7 @@ children:
                                             children:
                                             - type: primaryExpr
                                               children:
-                                              - input
+                                              - user_input
                               - )
         - )
         - type: compoundStatement
@@ -722,7 +722,7 @@ children:
                                                     children:
                                                     - type: primaryExpr
                                                       children:
-                                                      - input
+                                                      - user_input
                                       - )
                 - '?'
                 - type: assignmentExpression

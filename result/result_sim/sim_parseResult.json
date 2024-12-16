@@ -1,0 +1,168 @@
+{
+    "type": "program",
+    "children": [
+        {
+            "type": "includeDirective",
+            "children": [
+                "#",
+                "include",
+                "<iostream>"
+            ]
+        },
+        {
+            "type": "usingNamespaceDeclaration",
+            "children": [
+                "using",
+                "namespace",
+                "std",
+                ";"
+            ]
+        },
+        {
+            "type": "functionDefinition",
+            "children": [
+                {
+                    "type": "typeSpecifier",
+                    "children": [
+                        {
+                            "type": "baseTypeSpecifier",
+                            "children": [
+                                "int"
+                            ]
+                        }
+                    ]
+                },
+                "main",
+                "(",
+                ")",
+                {
+                    "type": "compoundStatement",
+                    "children": [
+                        "{",
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "outputStream",
+                                    "children": [
+                                        "cout",
+                                        "<<",
+                                        {
+                                            "type": "outputStreamTarget",
+                                            "children": [
+                                                {
+                                                    "type": "outExpression",
+                                                    "children": [
+                                                        {
+                                                            "type": "assignmentExpression",
+                                                            "children": [
+                                                                {
+                                                                    "type": "operationExpression",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "additionExpr",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "multiplicationExpr",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "unaryExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "postfixExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "primaryExpr",
+                                                                                                            "children": [
+                                                                                                                "\"Hello World\""
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                "<<",
+                                                {
+                                                    "type": "outputStreamTarget",
+                                                    "children": [
+                                                        {
+                                                            "type": "outExpression",
+                                                            "children": [
+                                                                "endl"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "jumpStatement",
+                                    "children": [
+                                        "return",
+                                        {
+                                            "type": "assignmentExpression",
+                                            "children": [
+                                                {
+                                                    "type": "operationExpression",
+                                                    "children": [
+                                                        {
+                                                            "type": "additionExpr",
+                                                            "children": [
+                                                                {
+                                                                    "type": "multiplicationExpr",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "unaryExpr",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "postfixExpr",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "primaryExpr",
+                                                                                            "children": [
+                                                                                                "0"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        "}"
+                    ]
+                }
+            ]
+        },
+        "<EOF>"
+    ]
+}

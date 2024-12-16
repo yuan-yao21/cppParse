@@ -54,7 +54,7 @@ children:
             children:
             - type: initDeclarator
               children:
-              - input
+              - user_input
         - ;
     - type: statement
       children:
@@ -90,7 +90,7 @@ children:
         - (
         - cin
         - ','
-        - input
+        - user_input
         - )
         - ;
     - type: statement
@@ -134,7 +134,7 @@ children:
               - (
               - type: primaryExpr
                 children:
-                - input
+                - user_input
               - )
         - ;
     - type: statement
