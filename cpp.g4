@@ -70,8 +70,8 @@ templateType
     ; // 模板类型，例如std::vector<int>
 
 compoundStatement
-    : '{'? statement* '}'?
-    ; // 复合语句，由大括号括起来的零个或多个语句组成
+    : '{' statement* '}'
+    | statement*; // 复合语句，由大括号括起来的零个或多个语句组成
 
 statement
     : declarationStatement

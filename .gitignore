@@ -1,0 +1,9 @@
+__pycache__/
+
+.vscode/
+
+result/
+
+test/*.exe
+
+test.py

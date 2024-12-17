@@ -18,6 +18,9 @@ class FunctionSymbol(Symbol):
         super().__init__(name, return_type, initialized)
         self.parameters = parameters  # 参数列表
 
+    def __repr__(self):
+        return f"Symbol(name={self.name}, type={self.type}, initialized={self.initialized}, value={self.value}, parameters={self.parameters})"
+
 
 class PointerSymbol(Symbol):
     def __init__(self, name: str, base_type: str, initialized: bool = False):
@@ -48,7 +51,7 @@ class SymbolTable:
         elif symbol_type == "pointer":
             self.symbols[name] = PointerSymbol(name, type_)
         elif symbol_type == "array":
-            # 假设这里默认数组大小为10
+            # 假设默认数组大小为10
             self.symbols[name] = ArraySymbol(name, type_, 10)
         else:
             raise ValueError(f"Unknown symbol type '{symbol_type}'")

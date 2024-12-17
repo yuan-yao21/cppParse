@@ -5,6 +5,25 @@ from cppLexer import cppLexer
 from cppParser import cppParser
 from cppVisitor import cppVisitor
 import Levenshtein
+import re
+
+
+# 定义C++关键字集合
+cpp_keywords = {
+    "alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel", "atomic_commit", 
+    "atomic_noexcept", "auto", "bitand", "bitor", "bool", "break", "case", 
+    "catch", "char", "char16_t", "char32_t", "class", "compl", "concept", 
+    "const", "consteval", "constexpr", "constinit", "continue", "decltype", 
+    "default", "delete", "do", "double", "dynamic_cast", "else", "enum", "explicit", 
+    "export", "extern", "false", "float", "for", "friend", "goto", "if", 
+    "inline", "int", "long", "mutable", "namespace", "new", "noexcept", "not", 
+    "not_eq", "nullptr", "operator", "or", "or_eq", "private", "protected", "public", 
+    "register", "reinterpret_cast", "requires", "return", "short", "signed", 
+    "sizeof", "static", "static_assert", "static_cast", "struct", "switch", "synchronized", 
+    "template", "this", "throw", "true", "try", "typedef", "typeid", "typename", 
+    "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t", "while"
+}
+
 
 class myVisitor(cppVisitor):
     def __init__(self):
@@ -163,8 +182,9 @@ class myVisitor(cppVisitor):
         return "Any"
 
     def visitContainerTypeSpecifier(self, ctx: cppParser.ContainerTypeSpecifierContext):
+        container_type = ctx.getChild(0).getText()
         base_type = self.visit(ctx.baseTypeSpecifier())
-        return f"List[{base_type}]"
+        return f"{container_type}[{base_type}]"
 
     def visitCompoundStatement(self, ctx: cppParser.CompoundStatementContext):
         statements = []
@@ -197,6 +217,9 @@ class myVisitor(cppVisitor):
         results = []
         for init_decl in ctx.initDeclaratorList().initDeclarator():
             var_name = init_decl.ID().getText()
+
+            if var_name in cpp_keywords:
+                self.report_error(ctx.start.line, f"Variable name '{var_name}' is a reserved keyword.")
             
             try:
                 # 检查变量类型并相应定义
@@ -214,10 +237,21 @@ class myVisitor(cppVisitor):
                     
                     if init_decl.initializer():
                         init_value = self.visit(init_decl.initializer())
+                        
+                        if type_spec == "int" and not init_value.isdigit():
+                            self.report_error(ctx.start.line, "Invalid integer initialization.")
+                        if type_spec == "float" and not init_value.replace(".", "", 1).isdigit():
+                            self.report_error(ctx.start.line, "Invalid float initialization.")
+                        if type_spec == "bool" and init_value not in ["True", "False"]:
+                            self.report_error(ctx.start.line, "Invalid boolean initialization.")
+                        if type_spec == "str" and not init_value.startswith("\"") and not init_value.endswith("\""):
+                            if not init_value.startswith("'") and not init_value.endswith("'"):
+                                self.report_error(ctx.start.line, "Invalid string initialization.")
+                        
                         self.current_scope.initialize(var_name, init_value)
                         results.append(f"{self.indent()}{var_name} = {init_value}")
                     else:
-                        if type_spec.startswith("List"):
+                        if type_spec.startswith("vector"):
                             params = []
                             for expr in init_decl.primaryExpr():
                                 param = self.visit(expr)
@@ -226,22 +260,22 @@ class myVisitor(cppVisitor):
                             if lenParams == 0:
                                 results.append(f"{self.indent()}{var_name} = []")
                             elif lenParams == 1:
-                                # TODO: maybe need to revise
-                                results.append(f"{self.indent()}{var_name} = [{params[0]}]")
+                                results.append(f"{self.indent()}{var_name} = [0] * {params[0]}")
                             elif lenParams == 2:
                                 results.append(f"{self.indent()}{var_name} = [{params[1]}] * {params[0]}")
                             else:
-                                # TODO: maybe error handling
+                                # Error handling
+                                self.report_error(ctx.start.line, "Invalid vector initialization or Now not supported method.")
                                 results.append(f"{self.indent()}{var_name} = []")
+                        elif type_spec.startswith("stack"):
+                            results.append(f"{self.indent()}{var_name} = []")
                         elif type_spec == "str":
                             params = []
                             for expr in init_decl.primaryExpr():
                                 param = self.visit(expr)
                                 params.append(param)
                             lenParams = len(params)
-                            if lenParams == 0:
-                                results.append(f"{self.indent()}{var_name} = None")
-                            elif lenParams == 2:
+                            if lenParams == 2:
                                 results.append(f"{self.indent()}{var_name} = {params[1]}")
                             else:
                                 results.append(f"{self.indent()}{var_name} = None")
@@ -302,6 +336,15 @@ class myVisitor(cppVisitor):
         # 处理赋值操作 (检查 ID 和可能的数组下标)
         if ctx.ID():
             var_name = ctx.ID().getText()
+
+            # 检查变量是否定义和初始化
+            symbol = self.current_scope.resolve(var_name)
+            if not symbol:
+                similar = self.find_similar_symbol(var_name)
+                suggestion = f"Did you mean '{similar}'?" if similar else "Make sure to declare the variable before using it."
+                self.report_error(ctx.start.line,
+                    f"Variable '{var_name}' is not defined.",
+                    suggestion)
             
             # 如果有数组下标，考虑数组形式的操作
             if ctx.arraySubscript():
@@ -326,7 +369,48 @@ class myVisitor(cppVisitor):
         
         # 如果没有ID，则处理单独的initializer
         elif ctx.initializer():
-            return self.visit(ctx.initializer())
+            dest_name = self.visit(ctx.initializer())
+
+            match = re.match(r'(\w+)\((.*)\)', dest_name)
+
+            if match:
+                # 如果是函数调用格式，提取函数名和参数
+                func_name = match.group(1)
+                params_str = match.group(2)
+                
+                # 分割参数字符串，处理空格和多余的逗号
+                params = [param.strip() for param in params_str.split(',') if param.strip()]
+
+                symbol_func = self.current_scope.resolve(func_name)
+                
+                if not symbol_func:
+                    suggestion = f"Make sure to declare the function before using it."
+                    self.report_error(ctx.start.line,
+                        f"Function '{func_name}' is not defined.",
+                        suggestion)
+                else:
+                    # 检查参数列表是否匹配
+                    expected_params = symbol_func.parameters  # 例如 [('a', 'int'), ('b', 'int')]
+                    
+                    # 判断参数个数是否一致
+                    if len(params) != len(expected_params):
+                        self.report_error(ctx.start.line,
+                                        f"Function '{func_name}' expects {len(expected_params)} parameters, "
+                                        f"but {len(params)} were provided.")
+                    else:
+                        # 遍历检查每个参数的名称和类型是否匹配
+                        for i, (param, (expected_name, expected_type)) in enumerate(zip(params, expected_params)):
+                            # 获取参数的类型
+                            resoled_param = self.current_scope.resolve(param)
+                            param_type = resoled_param.type
+
+                            # 检查类型，比较获取到的类型和符号表中预期的类型
+                            if param_type != expected_type:
+                                self.report_error(ctx.start.line,
+                                                f"Parameter '{param}' at position {i + 1} should be of type '{expected_type}', "
+                                                f"but found type '{param_type}'.")
+            
+            return dest_name
         
         return ""
 
@@ -633,7 +717,7 @@ class myVisitor(cppVisitor):
         if "endl" in target:
             target = target.replace("endl", "")
             return f"print({target})"
-        return f"print({target}, end=' ')"
+        return f"print({target}, end='')"
 
     def visitOutputStreamTarget(self, ctx: cppParser.OutputStreamTargetContext):
         if ctx.outExpression():

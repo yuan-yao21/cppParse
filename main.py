@@ -17,14 +17,14 @@ def convert_cpp_to_python(cpp_code: str) -> str:
     
     # 检查错误
     if visitor.errors:
-        print("转换过程中发现以下错误：")
+        print("Errors detected during translation are as follows:\n")
         for error in visitor.errors:
             print(error)
             
     return python_code
 
 def main():
-    file_symbol = 4
+    file_symbol = "sim"
 
     cpp_file_path = f'./test/{file_symbol}.cpp'
     if not os.path.exists(cpp_file_path):
@@ -50,7 +50,7 @@ def main():
     with open(python_file_path_2, 'w', encoding='utf-8') as python_file:
         python_file.write(python_code)
     
-    print(f"Translation has finished, python code is saved as {python_file_path}")
+    print(f"\nTranslation has finished, python code is saved in {output_dir}")
 
 if __name__ == '__main__':
     main()
