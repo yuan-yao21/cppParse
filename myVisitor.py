@@ -75,10 +75,12 @@ class myVisitor(cppVisitor):
                 self.current_scope.lib.append("endl")
                 self.current_scope.lib.append("string")
                 self.current_scope.lib.append("stoi")
+                self.current_scope.lib.append("getline")
                 return ""
             elif file_name == "string":
                 self.current_scope.lib.append("string")
                 self.current_scope.lib.append("stoi")
+                self.current_scope.lib.append("getline")
                 return ""
             elif file_name == "algorithm":
                 self.current_scope.lib.append("sort")
@@ -187,6 +189,8 @@ class myVisitor(cppVisitor):
         elif ctx.BOOL():
             return "bool"
         elif ctx.STRING():
+            if not "string" in self.current_scope.lib:
+                self.report_error(ctx.start.line, "Type 'string' is not available.", "Did you include the 'string' or 'iostream' library?")
             return "str"
         elif ctx.CHAR():
             return "str"
@@ -195,11 +199,19 @@ class myVisitor(cppVisitor):
         elif ctx.VOID():
             return "None"
         elif ctx.STRING_STREAM():
+            if not "stringstream" in self.current_scope.lib:
+                self.report_error(ctx.start.line, "Type 'stringstream' is not available.", "Did you include the 'sstream' library?")
             return "StringIO"
         return "Any"
 
     def visitContainerTypeSpecifier(self, ctx: cppParser.ContainerTypeSpecifierContext):
         container_type = ctx.getChild(0).getText()
+        if container_type == "vector":
+            if not "vector" in self.current_scope.lib:
+                self.report_error(ctx.start.line, "Type 'vector' is not available.", "Did you include the 'vector' library?")
+        elif container_type == "stack":
+            if not "stack" in self.current_scope.lib:
+                self.report_error(ctx.start.line, "Type 'stack' is not available.", "Did you include the 'stack' library?")
         base_type = self.visit(ctx.baseTypeSpecifier())
         return f"{container_type}[{base_type}]"
 
@@ -582,6 +594,8 @@ class myVisitor(cppVisitor):
         if ctx.logicalOrExpr():
             return self.visit(ctx.logicalOrExpr())
         elif ctx.GET():  # 处理getline
+            if not "getline" in self.current_scope.lib:
+                self.report_error(ctx.start.line, "Function 'getline' is not available.", "Did you include the 'sstream' or 'string' or 'iostream' library?")
             fakeStream = ctx.ID()[0].getText()
             var_name = ctx.ID()[1].getText()
             return f"for {var_name} in {fakeStream}"
@@ -719,12 +733,20 @@ class myVisitor(cppVisitor):
             
             # 转换C++函数到Python等效函数
             if func == "stoi":
+                if not "stoi" in self.current_scope.lib:
+                    self.report_error(ctx.start.line, "Function 'stoi' is not available.", "Did you include the 'string' or 'iostream' library?")
                 return f"int({args})"
             elif func == "isdigit":
+                if not "isdigit" in self.current_scope.lib:
+                    self.report_error(ctx.start.line, "Function 'isdigit' is not available.", "Did you include the 'cctype' library?")
                 return f"{args}.isdigit()"
             elif func == "isspace":
+                if not "isspace" in self.current_scope.lib:
+                    self.report_error(ctx.start.line, "Function 'isspace' is not available.", "Did you include the 'cctype' library?")
                 return f"{args}.isspace()"
             elif func == "sort":
+                if not "sort" in self.current_scope.lib:
+                    self.report_error(ctx.start.line, "Function 'sort' is not available.", "Did you include the 'algorithm' library?")
                 # 获取参数列表
                 if args:
                     args_list = args.split(',')
@@ -769,9 +791,13 @@ class myVisitor(cppVisitor):
 
     def visitInputStream(self, ctx: cppParser.InputStreamContext):
         if ctx.GET():  # getline
+            if not "getline" in self.current_scope.lib:
+                self.report_error(ctx.start.line, "Function 'getline' is not available.", "Did you include the 'sstream' or 'string' or 'iostream' library?")
             var = ctx.ID().getText()
             return f"{var} = input()"
         else:  # cin
+            if not "cin" in self.current_scope.lib:
+                self.report_error(ctx.start.line, "Input stream 'cin' is not available.", "Did you include the 'iostream' library?")
             target = self.visit(ctx.inputStreamTarget())
             return f"{target} = input()"
             
@@ -783,6 +809,8 @@ class myVisitor(cppVisitor):
         return ctx.ID().getText()
 
     def visitOutputStream(self, ctx: cppParser.OutputStreamContext):
+        if not "cout" in self.current_scope.lib:
+            self.report_error(ctx.start.line, "Output stream 'cout' is not available.", "Did you include the 'iostream' library?")
         target = self.visit(ctx.outputStreamTarget())
         if target is None:
             return ""
@@ -807,6 +835,8 @@ class myVisitor(cppVisitor):
 
     def visitOutExpression(self, ctx: cppParser.OutExpressionContext):
         if ctx.ENDL():
+            if not "endl" in self.current_scope.lib:
+                self.report_error(ctx.start.line, "Output stream 'endl' is not available.", "Did you include the 'iostream' library?")
             return '"\\n"'
         elif ctx.assignmentExpression():
             return self.visit(ctx.assignmentExpression())
