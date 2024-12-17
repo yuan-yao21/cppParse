@@ -1,7 +1,11 @@
 from typing import List
 from typing import List
+def noff():
+    print("Hello World", "\n", end='')
+    return 5
 def foo():
-    return "Hello World"
+    a = 5
+    return a
 def main():
     x = 10
     print("Hello World", "\n", end='')

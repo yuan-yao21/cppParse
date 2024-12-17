@@ -103,6 +103,11 @@ class myVisitor(cppVisitor):
         
         # 获取函数信息
         return_type = self.visit(ctx.typeSpecifier())
+        if return_type == "None":
+            for stmt in ctx.compoundStatement().statement():
+                if stmt.jumpStatement():
+                    if len(stmt.jumpStatement().children) > 2:
+                        self.report_error(ctx.start.line, "Void function cannot return a value.")
         func_name = ctx.ID().getText()
         self.current_function = func_name
         
@@ -482,17 +487,54 @@ class myVisitor(cppVisitor):
         if not ctx.children:
             return "return"
             
+        value = None
         if ctx.assignmentExpression():
             value = self.visit(ctx.assignmentExpression())
-            return f"return {value}"
         elif ctx.BooleanLiteral():
-            return f"return {ctx.BooleanLiteral().getText().lower()}"
+            value = ctx.BooleanLiteral().getText().capitalize()
         elif ctx.StringLiteral():
-            return f"return {ctx.StringLiteral().getText()}"
+            value = ctx.StringLiteral().getText()
         elif ctx.NUMBER():
-            return f"return {ctx.NUMBER().getText()}"
-            
-        return "return None"
+            value = ctx.NUMBER().getText()
+
+        if value is None:
+            return "return None"
+
+        exp_return_type = self.current_scope.resolve(self.current_function).type
+        if exp_return_type == "void":
+            # 如果函数返回类型是void，则不允许返回值
+            self.report_error(ctx.start.line, "Void function cannot return a value.")
+            return f"return"
+        elif exp_return_type == "int":
+            # 如果函数返回类型是int，则返回值必须是整数
+            if not value.isdigit():
+                return_symbol = self.current_scope.resolve(value)
+                if return_symbol.type != "int":
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'int'.")
+            return f"return {value}"
+        elif exp_return_type == "float" or exp_return_type == "double":
+            # 如果函数返回类型是float/double，则返回值必须是浮点数/整数
+            if not value.replace(".", "", 1).isdigit():
+                return_symbol = self.current_scope.resolve(value)
+                if return_symbol.type != "float" and return_symbol.type != "int":
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
+            return f"return {value}"
+        elif exp_return_type == "bool":
+            # 如果函数返回类型是bool，则返回值必须是布尔值
+            if value not in ["True", "False"]:
+                return_symbol = self.current_scope.resolve(value)
+                if return_symbol.type != "bool":
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'bool'.")
+            return f"return {value}"
+        elif exp_return_type == "str":
+            # 如果函数返回类型是str，则返回值必须是字符串
+            if not value.startswith("\"") and not value.endswith("\""):
+                return_symbol = self.current_scope.resolve(value)
+                if return_symbol.type != "str":
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'str'.")
+            return f"return {value}"
+        
+        return f"return {value}"
 
     def visitAssignmentExpression(self, ctx: cppParser.AssignmentExpressionContext):
         if ctx.operationExpression():

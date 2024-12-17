@@ -51,6 +51,103 @@
                         {
                             "type": "baseTypeSpecifier",
                             "children": [
+                                "void"
+                            ]
+                        }
+                    ]
+                },
+                "noff",
+                "(",
+                ")",
+                {
+                    "type": "compoundStatement",
+                    "children": [
+                        "{",
+                        {
+                            "type": "statement",
+                            "children": [
+                                {
+                                    "type": "outputStream",
+                                    "children": [
+                                        "cout",
+                                        "<<",
+                                        {
+                                            "type": "outputStreamTarget",
+                                            "children": [
+                                                {
+                                                    "type": "outExpression",
+                                                    "children": [
+                                                        {
+                                                            "type": "assignmentExpression",
+                                                            "children": [
+                                                                {
+                                                                    "type": "operationExpression",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "additionExpr",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "multiplicationExpr",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "unaryExpr",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "postfixExpr",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "primaryExpr",
+                                                                                                            "children": [
+                                                                                                                "\"Hello World\""
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                "<<",
+                                                {
+                                                    "type": "outputStreamTarget",
+                                                    "children": [
+                                                        {
+                                                            "type": "outExpression",
+                                                            "children": [
+                                                                "endl"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        ";"
+                                    ]
+                                }
+                            ]
+                        },
+                        "}"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "functionDefinition",
+            "children": [
+                {
+                    "type": "typeSpecifier",
+                    "children": [
+                        {
+                            "type": "baseTypeSpecifier",
+                            "children": [
                                 "int"
                             ]
                         }
