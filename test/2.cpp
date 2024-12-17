@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <string>
 using namespace std;
 int main() {
     string user_input;

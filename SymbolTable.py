@@ -38,6 +38,10 @@ class SymbolTable:
     def __init__(self, parent=None):
         self.symbols: Dict[str, Symbol] = {}
         self.parent = parent
+        if parent:
+            self.lib = parent.lib
+        else:
+            self.lib = []
         
     def define(self, name: str, type_: str, symbol_type: str = "variable") -> None:
         """定义新符号，并检查是否有重复定义"""
@@ -91,3 +95,11 @@ class SymbolTable:
     def define_array(self, name: str, base_type: str, size: int) -> None:
         """定义数组符号"""
         self.symbols[name] = ArraySymbol(name, base_type, size)
+
+    def define_lib(self, name: str) -> None:
+        """定义库函数"""
+        self.lib.append(name)
+
+    def resolve_lib(self, name: str) -> bool:
+        """检查是否为库函数"""
+        return name in self.lib

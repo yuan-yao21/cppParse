@@ -6,23 +6,7 @@ from cppParser import cppParser
 from cppVisitor import cppVisitor
 import Levenshtein
 import re
-
-
-# 定义C++关键字集合
-cpp_keywords = {
-    "alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel", "atomic_commit", 
-    "atomic_noexcept", "auto", "bitand", "bitor", "bool", "break", "case", 
-    "catch", "char", "char16_t", "char32_t", "class", "compl", "concept", 
-    "const", "consteval", "constexpr", "constinit", "continue", "decltype", 
-    "default", "delete", "do", "double", "dynamic_cast", "else", "enum", "explicit", 
-    "export", "extern", "false", "float", "for", "friend", "goto", "if", 
-    "inline", "int", "long", "mutable", "namespace", "new", "noexcept", "not", 
-    "not_eq", "nullptr", "operator", "or", "or_eq", "private", "protected", "public", 
-    "register", "reinterpret_cast", "requires", "return", "short", "signed", 
-    "sizeof", "static", "static_assert", "static_cast", "struct", "switch", "synchronized", 
-    "template", "this", "throw", "true", "try", "typedef", "typeid", "typename", 
-    "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t", "while"
-}
+from utils import cpp_keywords
 
 
 class myVisitor(cppVisitor):
@@ -81,15 +65,43 @@ class myVisitor(cppVisitor):
 
     def visitIncludeDirective(self, ctx: cppParser.IncludeDirectiveContext):
         # 将C++的include转换为Python的import
+        # 对于系统库，采取的方法为将相关的库函数直接添加到符号包的 lib 列表中，这里为了方便对 lib 列表进行处理，只存储了非常简要的信息（除了 func_name 未存取任何其他信息）
         include_file = ctx.IncludeFileName() or ctx.StringLiteral()
         if include_file:
             file_name = include_file.getText().strip('<>"')
-            if file_name == "vector":
+            if file_name == "iostream":
+                self.current_scope.lib.append("cin")
+                self.current_scope.lib.append("cout")
+                self.current_scope.lib.append("endl")
+                self.current_scope.lib.append("string")
+                self.current_scope.lib.append("stoi")
+                return ""
+            elif file_name == "string":
+                self.current_scope.lib.append("string")
+                self.current_scope.lib.append("stoi")
+                return ""
+            elif file_name == "algorithm":
+                self.current_scope.lib.append("sort")
+                return ""
+            elif file_name == "cctype":
+                self.current_scope.lib.append("isdigit")
+                self.current_scope.lib.append("isspace")
+                return ""
+            elif file_name == "sstream":
+                self.current_scope.lib.append("getline")
+                self.current_scope.lib.append("stringstream")
+                return "import io"
+            elif file_name == "vector":
+                self.current_scope.lib.append("vector")
+                self.current_scope.lib.append("vector.push_back")
+                self.current_scope.lib.append("vector.size")
                 return "from typing import List"
             elif file_name == "stack":
+                self.current_scope.lib.append("stack")
+                self.current_scope.lib.append("stack.push")
+                self.current_scope.lib.append("stack.top")
+                self.current_scope.lib.append("stack.pop")
                 return "from typing import List"
-            elif file_name == "sstream":
-                return "import io"
         return ""
 
     def visitUsingNamespaceDeclaration(self, ctx: cppParser.UsingNamespaceDeclarationContext):
@@ -243,14 +255,17 @@ class myVisitor(cppVisitor):
                     if init_decl.initializer():
                         init_value = self.visit(init_decl.initializer())
                         
-                        if type_spec == "int" and not init_value.isdigit():
-                            self.report_error(ctx.start.line, "Invalid integer initialization.")
-                        if type_spec == "float" and not init_value.replace(".", "", 1).isdigit():
-                            self.report_error(ctx.start.line, "Invalid float initialization.")
-                        if type_spec == "bool" and init_value not in ["True", "False"]:
-                            self.report_error(ctx.start.line, "Invalid boolean initialization.")
-                        if type_spec == "str" and not init_value.startswith("\"") and not init_value.endswith("\""):
-                            if not init_value.startswith("'") and not init_value.endswith("'"):
+                        if type_spec == "int":
+                            if init_value in ["True", "False"] or init_value.startswith("\"") or init_value.endswith("\"") or '.' in init_value:
+                                self.report_error(ctx.start.line, "Invalid integer initialization.")
+                        elif type_spec == "float":
+                            if init_value in ["True", "False"] or init_value.startswith("\"") or init_value.endswith("\""):
+                                self.report_error(ctx.start.line, "Invalid float initialization.")
+                        elif type_spec == "bool":
+                            if init_value.startswith("\"") or init_value.endswith("\"") or init_value.replace(".", "", 1).isdigit():
+                                self.report_error(ctx.start.line, "Invalid boolean initialization.")
+                        elif type_spec == "str":
+                            if init_value in ["True", "False"] or init_value.replace(".", "", 1).isdigit():
                                 self.report_error(ctx.start.line, "Invalid string initialization.")
                         
                         self.current_scope.initialize(var_name, init_value)
@@ -506,30 +521,46 @@ class myVisitor(cppVisitor):
             self.report_error(ctx.start.line, "Void function cannot return a value.")
             return f"return"
         elif exp_return_type == "int":
-            # 如果函数返回类型是int，则返回值必须是整数
+            # 如果函数返回类型是int，则返回值必须是整数。为了简单起见，表达式不判断，后续同理
             if not value.isdigit():
+                if not re.fullmatch(r'\w+', value):
+                    return f"return {value}"
                 return_symbol = self.current_scope.resolve(value)
+                if not return_symbol:
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
                 if return_symbol.type != "int":
                     self.report_error(ctx.start.line, "Invalid return value for function of type 'int'.")
             return f"return {value}"
         elif exp_return_type == "float" or exp_return_type == "double":
             # 如果函数返回类型是float/double，则返回值必须是浮点数/整数
             if not value.replace(".", "", 1).isdigit():
+                if not re.fullmatch(r'\w+', value):
+                    return f"return {value}"
                 return_symbol = self.current_scope.resolve(value)
+                if not return_symbol:
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
                 if return_symbol.type != "float" and return_symbol.type != "int":
                     self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
             return f"return {value}"
         elif exp_return_type == "bool":
             # 如果函数返回类型是bool，则返回值必须是布尔值
             if value not in ["True", "False"]:
+                if not re.fullmatch(r'\w+', value):
+                    return f"return {value}"
                 return_symbol = self.current_scope.resolve(value)
+                if not return_symbol:
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
                 if return_symbol.type != "bool":
                     self.report_error(ctx.start.line, "Invalid return value for function of type 'bool'.")
             return f"return {value}"
         elif exp_return_type == "str":
             # 如果函数返回类型是str，则返回值必须是字符串
             if not value.startswith("\"") and not value.endswith("\""):
+                if not re.fullmatch(r'\w+', value):
+                    return f"return {value}"
                 return_symbol = self.current_scope.resolve(value)
+                if not return_symbol:
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
                 if return_symbol.type != "str":
                     self.report_error(ctx.start.line, "Invalid return value for function of type 'str'.")
             return f"return {value}"

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
 using namespace std;
 bool isPalindrome(const string& s) {
     int left = 0, right = s.size() - 1;
