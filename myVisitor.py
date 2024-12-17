@@ -217,7 +217,7 @@ class myVisitor(cppVisitor):
                         self.current_scope.initialize(var_name, init_value)
                         results.append(f"{self.indent()}{var_name} = {init_value}")
                     else:
-                        if type_spec == "List[int]":
+                        if type_spec.startswith("List"):
                             params = []
                             for expr in init_decl.primaryExpr():
                                 param = self.visit(expr)
@@ -233,6 +233,18 @@ class myVisitor(cppVisitor):
                             else:
                                 # TODO: maybe error handling
                                 results.append(f"{self.indent()}{var_name} = []")
+                        elif type_spec == "str":
+                            params = []
+                            for expr in init_decl.primaryExpr():
+                                param = self.visit(expr)
+                                params.append(param)
+                            lenParams = len(params)
+                            if lenParams == 0:
+                                results.append(f"{self.indent()}{var_name} = None")
+                            elif lenParams == 2:
+                                results.append(f"{self.indent()}{var_name} = {params[1]}")
+                            else:
+                                results.append(f"{self.indent()}{var_name} = None")
                         elif type_spec == "StringIO":
                             # 获取 primaryExpr 节点并存储在 paramIO 变量中
                             params = []
@@ -339,12 +351,12 @@ class myVisitor(cppVisitor):
                 result.append(f"if {cond}:")
                 first = False
             else:
-                result.append(f"elif {cond}:")
+                result.append(f"{self.indent()}elif {cond}:")
             result.append(block)
             
         # 处理else块
         if len(ctx.compoundStatement()) > len(conditions):
-            result.append("    else:")
+            result.append(f"{self.indent()}else:")
             self.indentation += 1
             result.append(self.visit(ctx.compoundStatement()[-1]))
             self.indentation -= 1
@@ -493,7 +505,9 @@ class myVisitor(cppVisitor):
 
     def visitPrimaryExpr(self, ctx: cppParser.PrimaryExprContext):
         # 基本字面量
-        if ctx.NUMBER():
+        if ctx.CONTINUE():
+            return "continue"
+        elif ctx.NUMBER():
             return ctx.NUMBER().getText()
         elif ctx.StringLiteral():
             return ctx.StringLiteral().getText()
@@ -530,6 +544,8 @@ class myVisitor(cppVisitor):
                 return f"len({obj})"
             elif func == "push_back":
                 return f"{obj}.append({args})"
+            elif func == "push":
+                return f"{obj}.append({args})"
             elif func == "empty":
                 return f"not {obj}"
             elif func == "top":
@@ -549,6 +565,8 @@ class myVisitor(cppVisitor):
                 return f"int({args})"
             elif func == "isdigit":
                 return f"{args}.isdigit()"
+            elif func == "isspace":
+                return f"{args}.isspace()"
             elif func == "sort":
                 # 获取参数列表
                 if args:
@@ -615,7 +633,7 @@ class myVisitor(cppVisitor):
         if "endl" in target:
             target = target.replace("endl", "")
             return f"print({target})"
-        return f"print({target})"
+        return f"print({target}, end=' ')"
 
     def visitOutputStreamTarget(self, ctx: cppParser.OutputStreamTargetContext):
         if ctx.outExpression():
@@ -623,8 +641,10 @@ class myVisitor(cppVisitor):
             if ctx.outputStreamTarget():
                 next_target = self.visit(ctx.outputStreamTarget())
                 if next_target and expr:
-                    final_out = expr.strip("\"") + next_target.strip("\"")
-                    return f"\"{final_out}\""
+                    if expr.startswith("\"") or next_target.startswith("\""):
+                        return f"{expr}, {next_target}"
+                    else:
+                        return f"{expr} + {next_target}"
             return expr
         return ""
 

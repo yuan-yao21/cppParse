@@ -189,7 +189,8 @@ postfixExpr
     ;// 后缀表达式
 
 primaryExpr
-    : NUMBER              
+    : CONTINUE
+    | NUMBER              
     | StringLiteral             
     | BooleanLiteral     
     | ID                                      
@@ -372,6 +373,7 @@ GET     : 'getline';
 CIN     : 'cin' ;      // 标识符 cin
 COUT    : 'cout' ;     // 标识符 cout
 ENDL    : 'endl' ;     // 行结束标志
+CONTINUE: 'continue';   // continue 关键字
 
 NUMBER  
     : '-'? [0-9]+ ('.' [0-9]+)? 

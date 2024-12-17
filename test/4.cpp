@@ -12,8 +12,12 @@ bool isOperator(char c) {
 }
 
 int precedence(char op) {
-    if (op == '+' || op == '-') return 1;
-    if (op == '*' || op == '/') return 2;
+    if (op == '+' || op == '-') {
+        return 1;
+    }
+    if (op == '*' || op == '/') {
+        return 2;
+    }
     return 0;
 }
 
@@ -35,7 +39,8 @@ string infixToPostfix(const string& infix) {
         } else if (isdigit(c)) {
             postfix += c;
             while (i + 1 < infix.size() && isdigit(infix[i + 1])) {
-                postfix += infix[++i];
+                ++i;
+                postfix += infix[i];
             }
             postfix += " ";
             mayBeUnary = false;
@@ -98,7 +103,10 @@ int evaluatePostfix(const string& postfix) {
         else if (isdigit(postfix[i])) {
             int val = 0;
             while (i < postfix.size() && isdigit(postfix[i])) {
-                val = val * 10 + (postfix[i] - '0');
+                char fix_tmp = postfix[i];
+                string tmp_str(1, fix_tmp);
+                val = val * 10 + stoi(tmp_str);
+                // val = val * 10 + (postfix[i] - '0');
                 i++;
             }
             values.push(val);

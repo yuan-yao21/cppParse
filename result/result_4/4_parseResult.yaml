@@ -348,6 +348,7 @@ children:
         - )
         - type: compoundStatement
           children:
+          - '{'
           - type: statement
             children:
             - type: jumpStatement
@@ -369,139 +370,142 @@ children:
                             children:
                             - '1'
               - ;
+          - '}'
+    - type: statement
+      children:
+      - type: selectionStatement
+        children:
+        - if
+        - (
+        - type: logicalExpression
+          children:
+          - type: logicalOrExpr
+            children:
+            - type: logicalOrExpr
+              children:
+              - type: logicalAndExpr
+                children:
+                - type: equalityExpr
+                  children:
+                  - type: equalityExpr
+                    children:
+                    - type: relationalExpr
+                      children:
+                      - type: operationExpression
+                        children:
+                        - type: additionExpr
+                          children:
+                          - type: multiplicationExpr
+                            children:
+                            - type: unaryExpr
+                              children:
+                              - type: postfixExpr
+                                children:
+                                - type: primaryExpr
+                                  children:
+                                  - op
+                  - ==
+                  - type: relationalExpr
+                    children:
+                    - type: operationExpression
+                      children:
+                      - type: additionExpr
+                        children:
+                        - type: multiplicationExpr
+                          children:
+                          - type: unaryExpr
+                            children:
+                            - type: postfixExpr
+                              children:
+                              - type: primaryExpr
+                                children:
+                                - '''*'''
+            - '||'
+            - type: logicalAndExpr
+              children:
+              - type: equalityExpr
+                children:
+                - type: equalityExpr
+                  children:
+                  - type: relationalExpr
+                    children:
+                    - type: operationExpression
+                      children:
+                      - type: additionExpr
+                        children:
+                        - type: multiplicationExpr
+                          children:
+                          - type: unaryExpr
+                            children:
+                            - type: postfixExpr
+                              children:
+                              - type: primaryExpr
+                                children:
+                                - op
+                - ==
+                - type: relationalExpr
+                  children:
+                  - type: operationExpression
+                    children:
+                    - type: additionExpr
+                      children:
+                      - type: multiplicationExpr
+                        children:
+                        - type: unaryExpr
+                          children:
+                          - type: postfixExpr
+                            children:
+                            - type: primaryExpr
+                              children:
+                              - '''/'''
+        - )
+        - type: compoundStatement
+          children:
+          - '{'
           - type: statement
             children:
-            - type: selectionStatement
+            - type: jumpStatement
               children:
-              - if
-              - (
-              - type: logicalExpression
+              - return
+              - type: assignmentExpression
                 children:
-                - type: logicalOrExpr
+                - type: operationExpression
                   children:
-                  - type: logicalOrExpr
+                  - type: additionExpr
                     children:
-                    - type: logicalAndExpr
+                    - type: multiplicationExpr
                       children:
-                      - type: equalityExpr
+                      - type: unaryExpr
                         children:
-                        - type: equalityExpr
+                        - type: postfixExpr
                           children:
-                          - type: relationalExpr
+                          - type: primaryExpr
                             children:
-                            - type: operationExpression
-                              children:
-                              - type: additionExpr
-                                children:
-                                - type: multiplicationExpr
-                                  children:
-                                  - type: unaryExpr
-                                    children:
-                                    - type: postfixExpr
-                                      children:
-                                      - type: primaryExpr
-                                        children:
-                                        - op
-                        - ==
-                        - type: relationalExpr
-                          children:
-                          - type: operationExpression
-                            children:
-                            - type: additionExpr
-                              children:
-                              - type: multiplicationExpr
-                                children:
-                                - type: unaryExpr
-                                  children:
-                                  - type: postfixExpr
-                                    children:
-                                    - type: primaryExpr
-                                      children:
-                                      - '''*'''
-                  - '||'
-                  - type: logicalAndExpr
-                    children:
-                    - type: equalityExpr
-                      children:
-                      - type: equalityExpr
-                        children:
-                        - type: relationalExpr
-                          children:
-                          - type: operationExpression
-                            children:
-                            - type: additionExpr
-                              children:
-                              - type: multiplicationExpr
-                                children:
-                                - type: unaryExpr
-                                  children:
-                                  - type: postfixExpr
-                                    children:
-                                    - type: primaryExpr
-                                      children:
-                                      - op
-                      - ==
-                      - type: relationalExpr
-                        children:
-                        - type: operationExpression
-                          children:
-                          - type: additionExpr
-                            children:
-                            - type: multiplicationExpr
-                              children:
-                              - type: unaryExpr
-                                children:
-                                - type: postfixExpr
-                                  children:
-                                  - type: primaryExpr
-                                    children:
-                                    - '''/'''
-              - )
-              - type: compoundStatement
+                            - '2'
+              - ;
+          - '}'
+    - type: statement
+      children:
+      - type: jumpStatement
+        children:
+        - return
+        - type: assignmentExpression
+          children:
+          - type: operationExpression
+            children:
+            - type: additionExpr
+              children:
+              - type: multiplicationExpr
                 children:
-                - type: statement
+                - type: unaryExpr
                   children:
-                  - type: jumpStatement
+                  - type: postfixExpr
                     children:
-                    - return
-                    - type: assignmentExpression
+                    - type: primaryExpr
                       children:
-                      - type: operationExpression
-                        children:
-                        - type: additionExpr
-                          children:
-                          - type: multiplicationExpr
-                            children:
-                            - type: unaryExpr
-                              children:
-                              - type: postfixExpr
-                                children:
-                                - type: primaryExpr
-                                  children:
-                                  - '2'
-                    - ;
-                - type: statement
-                  children:
-                  - type: jumpStatement
-                    children:
-                    - return
-                    - type: assignmentExpression
-                      children:
-                      - type: operationExpression
-                        children:
-                        - type: additionExpr
-                          children:
-                          - type: multiplicationExpr
-                            children:
-                            - type: unaryExpr
-                              children:
-                              - type: postfixExpr
-                                children:
-                                - type: primaryExpr
-                                  children:
-                                  - '0'
-                    - ;
-                - '}'
+                      - '0'
+        - ;
+    - '}'
 - type: functionDefinition
   children:
   - type: typeSpecifier
@@ -1211,6 +1215,31 @@ children:
                           children:
                           - type: expStatement
                             children:
+                            - type: initializer
+                              children:
+                              - type: assignmentExpression
+                                children:
+                                - type: operationExpression
+                                  children:
+                                  - type: additionExpr
+                                    children:
+                                    - type: multiplicationExpr
+                                      children:
+                                      - type: unaryExpr
+                                        children:
+                                        - ++
+                                        - type: postfixExpr
+                                          children:
+                                          - type: primaryExpr
+                                            children:
+                                            - i
+                          - ;
+                      - type: statement
+                        children:
+                        - type: expressionStatement
+                          children:
+                          - type: expStatement
+                            children:
                             - postfix
                             - +=
                             - type: initializer
@@ -1243,7 +1272,6 @@ children:
                                                       children:
                                                       - type: unaryExpr
                                                         children:
-                                                        - ++
                                                         - type: postfixExpr
                                                           children:
                                                           - type: primaryExpr
@@ -3260,6 +3288,86 @@ children:
                       - '{'
                       - type: statement
                         children:
+                        - type: declarationStatement
+                          children:
+                          - type: variableDeclaration
+                            children:
+                            - type: typeSpecifier
+                              children:
+                              - type: baseTypeSpecifier
+                                children:
+                                - char
+                            - type: initDeclaratorList
+                              children:
+                              - type: initDeclarator
+                                children:
+                                - fix_tmp
+                                - '='
+                                - type: initializer
+                                  children:
+                                  - type: assignmentExpression
+                                    children:
+                                    - type: operationExpression
+                                      children:
+                                      - type: additionExpr
+                                        children:
+                                        - type: multiplicationExpr
+                                          children:
+                                          - type: unaryExpr
+                                            children:
+                                            - type: postfixExpr
+                                              children:
+                                              - type: primaryExpr
+                                                children:
+                                                - postfix
+                                                - '['
+                                                - type: argList
+                                                  children:
+                                                  - type: assignmentExpression
+                                                    children:
+                                                    - type: operationExpression
+                                                      children:
+                                                      - type: additionExpr
+                                                        children:
+                                                        - type: multiplicationExpr
+                                                          children:
+                                                          - type: unaryExpr
+                                                            children:
+                                                            - type: postfixExpr
+                                                              children:
+                                                              - type: primaryExpr
+                                                                children:
+                                                                - i
+                                                - ']'
+                          - ;
+                      - type: statement
+                        children:
+                        - type: declarationStatement
+                          children:
+                          - type: variableDeclaration
+                            children:
+                            - type: typeSpecifier
+                              children:
+                              - type: baseTypeSpecifier
+                                children:
+                                - string
+                            - type: initDeclaratorList
+                              children:
+                              - type: initDeclarator
+                                children:
+                                - tmp_str
+                                - (
+                                - type: primaryExpr
+                                  children:
+                                  - '1'
+                                - ','
+                                - type: primaryExpr
+                                  children:
+                                  - fix_tmp
+                                - )
+                          - ;
+                      - type: statement
+                        children:
                         - type: expressionStatement
                           children:
                           - type: expStatement
@@ -3304,51 +3412,27 @@ children:
                                           children:
                                           - type: primaryExpr
                                             children:
-                                            - (
-                                            - type: operationExpression
+                                            - type: frontFunctionName
                                               children:
-                                              - type: additionExpr
+                                              - stoi
+                                            - (
+                                            - type: argList
+                                              children:
+                                              - type: assignmentExpression
                                                 children:
-                                                - type: additionExpr
+                                                - type: operationExpression
                                                   children:
-                                                  - type: multiplicationExpr
+                                                  - type: additionExpr
                                                     children:
-                                                    - type: unaryExpr
+                                                    - type: multiplicationExpr
                                                       children:
-                                                      - type: postfixExpr
+                                                      - type: unaryExpr
                                                         children:
-                                                        - type: primaryExpr
+                                                        - type: postfixExpr
                                                           children:
-                                                          - postfix
-                                                          - '['
-                                                          - type: argList
+                                                          - type: primaryExpr
                                                             children:
-                                                            - type: assignmentExpression
-                                                              children:
-                                                              - type: operationExpression
-                                                                children:
-                                                                - type: additionExpr
-                                                                  children:
-                                                                  - type: multiplicationExpr
-                                                                    children:
-                                                                    - type: unaryExpr
-                                                                      children:
-                                                                      - type: postfixExpr
-                                                                        children:
-                                                                        - type: primaryExpr
-                                                                          children:
-                                                                          - i
-                                                          - ']'
-                                                - '-'
-                                                - type: multiplicationExpr
-                                                  children:
-                                                  - type: unaryExpr
-                                                    children:
-                                                    - type: postfixExpr
-                                                      children:
-                                                      - type: primaryExpr
-                                                        children:
-                                                        - '''0'''
+                                                            - tmp_str
                                             - )
                           - ;
                       - type: statement
