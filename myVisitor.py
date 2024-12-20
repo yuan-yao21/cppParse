@@ -270,15 +270,40 @@ class myVisitor(cppVisitor):
                         if type_spec == "int":
                             if init_value in ["True", "False"] or init_value.startswith("\"") or init_value.endswith("\"") or '.' in init_value:
                                 self.report_error(ctx.start.line, "Invalid integer initialization.")
+                            elif not init_value.isdigit() and re.fullmatch(r'\w+', init_value):
+                                return_symbol = self.current_scope.resolve(init_value)
+                                if not return_symbol:
+                                    self.report_error(ctx.start.line, "Invalid initialization: variable not defined.")
+                                if return_symbol.type != "int":
+                                    self.report_error(ctx.start.line, "Invalid integer initialization.")
                         elif type_spec == "float":
                             if init_value in ["True", "False"] or init_value.startswith("\"") or init_value.endswith("\""):
                                 self.report_error(ctx.start.line, "Invalid float initialization.")
+                            elif not init_value.replace(".", "", 1).isdigit() and re.fullmatch(r'\w+', init_value):
+                                return_symbol = self.current_scope.resolve(init_value)
+                                if not return_symbol:
+                                    self.report_error(ctx.start.line, "Invalid initialization: variable not defined.")
+                                if return_symbol.type != "float" and return_symbol.type != "int":
+                                    self.report_error(ctx.start.line, "Invalid float initialization.")
                         elif type_spec == "bool":
                             if init_value.startswith("\"") or init_value.endswith("\"") or init_value.replace(".", "", 1).isdigit():
                                 self.report_error(ctx.start.line, "Invalid boolean initialization.")
+                            elif not init_value in ["True", "False"] and re.fullmatch(r'\w+', init_value):
+                                return_symbol = self.current_scope.resolve(init_value)
+                                if not return_symbol:
+                                    self.report_error(ctx.start.line, "Invalid initialization: variable not defined.")
+                                if return_symbol.type != "bool":
+                                    self.report_error(ctx.start.line, "Invalid boolean initialization.")
                         elif type_spec == "str":
                             if init_value in ["True", "False"] or init_value.replace(".", "", 1).isdigit():
                                 self.report_error(ctx.start.line, "Invalid string initialization.")
+                            elif not init_value.startswith("\"") or not init_value.endswith("\""):
+                                if re.fullmatch(r'\w+', init_value):
+                                    return_symbol = self.current_scope.resolve(init_value)
+                                    if not return_symbol:
+                                        self.report_error(ctx.start.line, "Invalid initialization: variable not defined.")
+                                    if return_symbol.type != "str":
+                                        self.report_error(ctx.start.line, "Invalid string initialization.")
                         
                         self.current_scope.initialize(var_name, init_value)
                         results.append(f"{self.indent()}{var_name} = {init_value}")
@@ -535,33 +560,45 @@ class myVisitor(cppVisitor):
         elif exp_return_type == "int":
             # 如果函数返回类型是int，则返回值必须是整数。为了简单起见，表达式不判断，后续同理
             if not value.isdigit():
+                if value.startswith("\"") and value.endswith("\""):
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'int'.")
+                    return f"return {value}"
                 if not re.fullmatch(r'\w+', value):
                     return f"return {value}"
                 return_symbol = self.current_scope.resolve(value)
                 if not return_symbol:
-                    self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
+                    self.report_error(ctx.start.line, "Invalid return: variable not defined.")
+                    return f"return {value}"
                 if return_symbol.type != "int":
                     self.report_error(ctx.start.line, "Invalid return value for function of type 'int'.")
             return f"return {value}"
         elif exp_return_type == "float" or exp_return_type == "double":
             # 如果函数返回类型是float/double，则返回值必须是浮点数/整数
             if not value.replace(".", "", 1).isdigit():
+                if value.startswith("\"") and value.endswith("\""):
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
+                    return f"return {value}"
                 if not re.fullmatch(r'\w+', value):
                     return f"return {value}"
                 return_symbol = self.current_scope.resolve(value)
                 if not return_symbol:
-                    self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
+                    self.report_error(ctx.start.line, "Invalid return: variable not defined.")
+                    return f"return {value}"
                 if return_symbol.type != "float" and return_symbol.type != "int":
                     self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
             return f"return {value}"
         elif exp_return_type == "bool":
             # 如果函数返回类型是bool，则返回值必须是布尔值
             if value not in ["True", "False"]:
+                if value.startswith("\"") and value.endswith("\""):
+                    self.report_error(ctx.start.line, "Invalid return value for function of type 'bool'.")
+                    return f"return {value}"
                 if not re.fullmatch(r'\w+', value):
                     return f"return {value}"
                 return_symbol = self.current_scope.resolve(value)
                 if not return_symbol:
-                    self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
+                    self.report_error(ctx.start.line, "Invalid return: variable not defined.")
+                    return f"return {value}"
                 if return_symbol.type != "bool":
                     self.report_error(ctx.start.line, "Invalid return value for function of type 'bool'.")
             return f"return {value}"
@@ -572,7 +609,8 @@ class myVisitor(cppVisitor):
                     return f"return {value}"
                 return_symbol = self.current_scope.resolve(value)
                 if not return_symbol:
-                    self.report_error(ctx.start.line, "Invalid return value for function of type 'float'.")
+                    self.report_error(ctx.start.line, "Invalid return: variable not defined.")
+                    return f"return {value}"
                 if return_symbol.type != "str":
                     self.report_error(ctx.start.line, "Invalid return value for function of type 'str'.")
             return f"return {value}"

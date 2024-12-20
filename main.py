@@ -9,7 +9,7 @@ from utils import print_green, print_red
 import os
 
 
-file_symbol = "4"
+file_symbol = "1"
 
 
 def convert_cpp_to_python(cpp_code: str) -> str:
@@ -59,13 +59,15 @@ def convert_cpp_to_python(cpp_code: str) -> str:
     visitor = myVisitor()
     python_code = visitor.visit(tree)
     
+    ifRight = True
     # 检查错误
     if visitor.errors:
+        ifRight = False
         print_red("Errors detected during translation are as follows:\n")
         for error in visitor.errors:
             print_red(error)
             
-    return python_code
+    return python_code, ifRight
 
 
 def main():
@@ -78,8 +80,9 @@ def main():
         cpp_code = cpp_file.read()
         
 
-    python_code = convert_cpp_to_python(cpp_code)
-
+    python_code, ifRight = convert_cpp_to_python(cpp_code)
+    if not ifRight:
+        return
 
     output_dir = f'./result/result_{file_symbol}'
     os.makedirs(output_dir, exist_ok=True)

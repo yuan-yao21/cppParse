@@ -10,16 +10,14 @@ conda activate parse
 pip install -r requirments.txt
 ```
 
+If other libraries are missing, follow the prompts to install them.
+
 ## Run code
 
-Run parse(the first part of homework):
-
-```bash
-python parse.py
-```
-
-Run full function(the second part of homework):
+Modify the `file_symbol` variable in `main.py` to handle different files:
 
 ```bash
 python main.py
 ```
+
+You will find the results in the `./result/result_{file_symbol}` folder.
