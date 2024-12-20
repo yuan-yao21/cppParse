@@ -14,7 +14,7 @@ If other libraries are missing, follow the prompts to install them.
 
 ## Run code
 
-Modify the `file_symbol` variable in `main.py` to handle different files:
+Modify the `file_symbol` variable(which can be: 1, 2, 3, 4, err1, err2, err3, err4, err5, err6, err7_1, err7_2) in `main.py` to handle different files:
 
 ```bash
 python main.py
